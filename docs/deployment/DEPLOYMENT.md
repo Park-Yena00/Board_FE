@@ -239,6 +239,58 @@ env:
 2. Docker 이미지 생성 및 푸시
 3. Kubernetes 매니페스트 업데이트
 
+### 방법 4: GitHub Actions + ArgoCD 통합 (권장)
+
+GitHub Actions와 ArgoCD를 함께 사용하는 것이 **권장되는 일반적인 패턴**입니다.
+
+**역할 분담:**
+- **GitHub Actions (CI)**: 코드 빌드, 테스트, Docker 이미지 생성 및 푸시
+- **ArgoCD (CD)**: GitOps 기반 자동 배포
+
+#### 1단계: GitHub Actions 설정 (이미 완료)
+
+`.github/workflows/ci-cd.yml`이 자동으로:
+1. Docker 이미지를 빌드하고 레지스트리에 푸시
+2. `k8s/deployment.yaml`의 이미지 태그를 업데이트
+3. 변경사항을 GitHub에 커밋
+
+#### 2단계: ArgoCD Application 생성
+
+```bash
+# argocd-application.yaml이 이미 설정되어 있음
+# 저장소 URL만 확인 필요
+kubectl apply -f k8s/argocd-application.yaml
+
+# ArgoCD UI에서 확인
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+# 브라우저: https://localhost:8080
+```
+
+#### 3단계: 자동 워크플로우
+
+`main` 브랜치에 push하면:
+1. **GitHub Actions**가 이미지를 빌드하고 `deployment.yaml` 업데이트
+2. **ArgoCD**가 변경사항을 감지하고 Kubernetes에 자동 배포
+
+**자세한 내용**: [GitHub Actions와 ArgoCD 통합 가이드](./GITHUB_ACTIONS_ARGOCD_INTEGRATION.md)
+
+#### 백엔드와 ArgoCD 사용
+
+**같은 ArgoCD를 사용하는 것이 권장됩니다.**
+
+ArgoCD는 하나의 클러스터에서 여러 애플리케이션을 관리할 수 있습니다:
+
+```
+ArgoCD (하나의 인스턴스)
+├─ board-backend Application
+│  └─ 저장소: https://github.com/Suehyun666/Board_BE.git
+│
+└─ board-frontend Application
+   └─ 저장소: https://github.com/Park-Yena00/Board_FE.git
+```
+
+각각 다른 Application으로 관리하되, 같은 ArgoCD 인스턴스를 사용합니다.
+
 ## 모니터링 설정
 
 ### Prometheus 연동
