@@ -21,7 +21,7 @@ spec:
       containers:
       - name: frontend
         image: board-frontend:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Never
         ports:
         - containerPort: 80
           name: http
