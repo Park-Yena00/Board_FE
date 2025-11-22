@@ -66,7 +66,6 @@ export const metricsApi = {
 
       // Prometheus 형식을 파싱하여 MetricData로 변환
       const lines = prometheusFormat.split('\n')
-      let currentMetric: Partial<MetricData> | null = null
 
       for (const line of lines) {
         if (line.startsWith('# TYPE')) {
