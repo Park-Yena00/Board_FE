@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: board-frontend-config
+  labels:
+    app: board-frontend
+data:
+  # 백엔드 API 기본 URL
+  # Kubernetes 내부: http://board-backend-service:8080
+  # 로컬 개발: http://localhost:8080
+  # 프로덕션: https://api.moodie.shop
+  VITE_API_BASE_URL: "https://api.moodie.shop"
+
