@@ -70,7 +70,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: board-frontend
-  namespace: argocd
+  namespace: myargocd  # ArgoCD가 설치된 네임스페이스
 spec:
   project: default
   source:
@@ -79,7 +79,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: board-frontend  # 또는 default
+    namespace: board-frontend  # 프론트엔드 애플리케이션이 배포될 네임스페이스
   syncPolicy:
     automated:
       prune: true
@@ -96,7 +96,7 @@ spec:
 kubectl apply -f k8s/argocd-application.yaml
 
 # ArgoCD UI에서 확인
-kubectl port-forward svc/argocd-server -n argocd 8080:443
+kubectl port-forward svc/argocd-server -n myargocd 8080:443
 # 브라우저: https://localhost:8080
 ```
 
@@ -134,7 +134,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: board-backend
-  namespace: argocd
+  namespace: myargocd  # ArgoCD가 설치된 네임스페이스
 spec:
   project: default
   source:
@@ -157,7 +157,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: board-frontend
-  namespace: argocd
+  namespace: myargocd  # ArgoCD가 설치된 네임스페이스
 spec:
   project: default
   source:
@@ -166,7 +166,7 @@ spec:
     path: k8s
   destination:
     server: https://kubernetes.default.svc
-    namespace: board-frontend
+    namespace: board-frontend  # 프론트엔드 애플리케이션이 배포될 네임스페이스
   syncPolicy:
     automated:
       prune: true
@@ -222,7 +222,7 @@ git push origin main
 
 - [ ] ArgoCD 설치 확인
   ```bash
-  kubectl get pods -n argocd
+  kubectl get pods -n myargocd
   ```
 
 - [ ] ArgoCD Application 생성
@@ -232,7 +232,7 @@ git push origin main
 
 - [ ] ArgoCD UI 접속 확인
   ```bash
-  kubectl port-forward svc/argocd-server -n argocd 8080:443
+  kubectl port-forward svc/argocd-server -n myargocd 8080:443
   ```
 
 - [ ] Git 저장소 접근 권한 확인
@@ -244,7 +244,7 @@ git push origin main
 
 ```bash
 # ArgoCD Application 새로고침
-kubectl patch application board-frontend -n argocd --type merge -p '{"operation":{"initiatedBy":{"username":"admin"},"sync":{"revision":"main"}}}'
+kubectl patch application board-frontend -n myargocd --type merge -p '{"operation":{"initiatedBy":{"username":"admin"},"sync":{"revision":"main"}}}'
 
 # 또는 ArgoCD UI에서 "Refresh" 버튼 클릭
 ```
@@ -259,7 +259,7 @@ kubectl patch application board-frontend -n argocd --type merge -p '{"operation"
 
 2. **ArgoCD Sync 상태 확인**
    ```bash
-   kubectl get application board-frontend -n argocd -o yaml
+   kubectl get application board-frontend -n myargocd -o yaml
    ```
 
 3. **수동 Sync**

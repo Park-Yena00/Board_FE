@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: board-frontend
-  namespace: argocd
+  namespace: myargocd
 spec:
   project: default
   source:
