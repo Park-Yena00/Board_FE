@@ -16,7 +16,16 @@ spec:
     automated:
       prune: true
       selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  syncOptions:
+    - CreateNamespace=true
+  ignoreDifferences:
+  - group: networking.k8s.io
+    kind: Ingress
+    jsonPointers:
+    - /spec
+  - group: monitoring.coreos.com
+    kind: ServiceMonitor
+    jsonPointers:
+    - /spec
   revisionHistoryLimit: 10
 

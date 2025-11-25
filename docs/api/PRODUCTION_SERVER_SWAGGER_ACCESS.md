@@ -22,8 +22,6 @@
 - https://api.moodie.shop/swagger-ui.html
 - 또는 http://api.moodie.shop/swagger-ui.html
 
-**참고:** 제공된 정보에 "wagger-ui.html"이라고 되어 있지만, 올바른 경로는 "swagger-ui.html"입니다.
-
 ### Redoc 접속
 
 - https://api.moodie.shop/redoc.html

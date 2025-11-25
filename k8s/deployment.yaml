@@ -18,6 +18,12 @@ spec:
         prometheus.io/port: "80"
         prometheus.io/path: "/metrics"
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: myserver01
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
       containers:
       - name: frontend
         image: board-frontend:latest
