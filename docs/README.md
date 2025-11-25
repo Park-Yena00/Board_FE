@@ -4,10 +4,12 @@
 
 ## 📚 문서 목록
 
-### 백엔드 연동
-- [백엔드 연동 가이드](./backend/BACKEND_INTEGRATION.md) - 프론트엔드와 백엔드 API 연동 방법 (연동 완료 요약 포함)
-### API 문서
-- [프로덕션 서버 Swagger 접속](./api/PRODUCTION_SERVER_SWAGGER_ACCESS.md) - 프로덕션 서버 Swagger 접속 방법
+### 배포 가이드 (백엔드 팀원용)
+- **[배포 필수 정보](./deployment/DEPLOYMENT_INFO.md)** 
+  - Git 저장소, 도메인, VM 정보 등 배포에 필요한 모든 정보
+- [빠른 배포 가이드](./deployment/QUICK_DEPLOYMENT_GUIDE.md) - 5분 빠른 배포
+- [상세 배포 가이드](./deployment/FRONTEND_DEPLOYMENT_GUIDE.md) - 전체 배포 과정
+- [트러블슈팅 가이드](./deployment/TROUBLESHOOTING.md) - 문제 해결
 
 
 ## 🔗 외부 링크

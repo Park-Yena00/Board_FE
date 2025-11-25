@@ -140,13 +140,18 @@ GitHub Actions를 사용하여 자동 빌드 및 배포가 구성되어 있습�
 ### 프론트엔드 배포 및 백엔드 연동
 
 **백엔드 팀원을 위한 배포 가이드:**
-- [프론트엔드 배포 및 백엔드 연동 가이드](./docs/deployment/FRONTEND_DEPLOYMENT_GUIDE.md) - **이 문서를 먼저 확인하세요!**
 
-이 가이드에는 다음이 포함되어 있습니다:
-- 프론트엔드 저장소 클론 및 Docker 이미지 빌드
-- Kubernetes 배포 방법
-- 백엔드 연동 설정
-- 접근 방법 및 트러블슈팅
+1. **[배포 필수 정보](./docs/deployment/DEPLOYMENT_INFO.md)** ⭐ **먼저 읽어주세요!**
+   - Git 저장소 주소, 도메인 정보, VM 정보 등 배포에 필요한 모든 정보
+
+2. **[빠른 배포 가이드](./docs/deployment/QUICK_DEPLOYMENT_GUIDE.md)** - 5분 빠른 배포
+   - 간단한 배포 절차 요약
+
+3. **[상세 배포 가이드](./docs/deployment/FRONTEND_DEPLOYMENT_GUIDE.md)** - 전체 배포 과정
+   - 단계별 상세 설명 및 트러블슈팅
+
+4. **[트러블슈팅 가이드](./docs/deployment/TROUBLESHOOTING.md)** - 문제 해결
+   - 자주 발생하는 문제 및 해결 방법
 
 
 ## 📚 문서

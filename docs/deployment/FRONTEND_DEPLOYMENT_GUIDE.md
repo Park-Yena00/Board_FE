@@ -574,12 +574,3 @@ board-app (백엔드)
 
 - **프론트엔드:** 80 (컨테이너), 31655 (Ingress Controller NodePort)
 - **백엔드:** 8080 (컨테이너), 32373 (Ingress Controller HTTPS NodePort)
-
-## 🆘 지원
-
-문제가 발생하면 다음을 확인하세요:
-
-1. Pod 로그: `kubectl logs <pod-name> -n board-frontend`
-2. Ingress Controller 로그: `kubectl logs <ingress-pod> -n mynginx`
-3. 이벤트: `kubectl get events -n board-frontend --sort-by='.lastTimestamp'`
-
