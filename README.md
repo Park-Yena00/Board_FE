@@ -61,7 +61,11 @@ VITE_API_BASE_URL=http://localhost:8080
 **중요**: 백엔드 API는 `/api` prefix를 사용하므로, `VITE_API_BASE_URL`에는 기본 URL만 설정하면 됩니다.
 프론트엔드 코드에서 자동으로 `/api`를 추가합니다.
 
-자세한 백엔드 연동 방법은 [백엔드 연동 가이드](./docs/backend/BACKEND_INTEGRATION.md)를 참고하세요.
+자세한 백엔드 연동 방법은 아래 문서를 참고하세요.
+[백엔드 연동 가이드]
+(./docs/deployment/QUICK_DEPLOYMENT_GUIDE.md)
+(./docs/deployment/FRONTEND_DEPLOYMENT_GUIDE.md)
+
 
 ## Docker 빌드 및 실행
 
@@ -131,17 +135,23 @@ GitHub Actions를 사용하여 자동 빌드 및 배포가 구성되어 있습�
 └── nginx.conf          # Nginx 설정
 ```
 
-## VM 환경 배포 가이드
+## 🚀 배포 가이드
 
-VirtualBox Ubuntu VM에서 배포하는 방법은 [VM 배포 가이드](./docs/deployment/DEPLOYMENT.md)를 참고하세요.
+### 프론트엔드 배포 및 백엔드 연동
+
+**백엔드 팀원을 위한 배포 가이드:**
+- [프론트엔드 배포 및 백엔드 연동 가이드](./docs/deployment/FRONTEND_DEPLOYMENT_GUIDE.md) - **이 문서를 먼저 확인하세요!**
+
+이 가이드에는 다음이 포함되어 있습니다:
+- 프론트엔드 저장소 클론 및 Docker 이미지 빌드
+- Kubernetes 배포 방법
+- 백엔드 연동 설정
+- 접근 방법 및 트러블슈팅
+
 
 ## 📚 문서
 
 프로젝트 관련 상세 문서는 [docs](./docs/README.md) 디렉토리를 참고하세요.
-
-## 🔗 Git 레포지토리 분리 시 백엔드 연동
-
-프론트엔드와 백엔드가 서로 다른 Git 레포지토리에 있어도 **정상적으로 연동 가능**합니다.
 
 ### 연동 방법
 
@@ -156,7 +166,6 @@ VirtualBox Ubuntu VM에서 배포하는 방법은 [VM 배포 가이드](./docs/d
 3. **네트워크 접근**
    - 프론트엔드가 백엔드 API에 HTTP/HTTPS 요청 가능해야 함
 
-자세한 내용은 [문서](./docs/README.md#-git-레포지토리-분리-시-백엔드-연동)를 참고하세요.
 
 ### 빠른 시작 (VM에서)
 
