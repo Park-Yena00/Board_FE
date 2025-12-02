@@ -1,0 +1,71 @@
+```mermaid
+graph TB
+    subgraph "사용자 환경"
+        User[👤 사용자<br/>브라우저]
+    end
+    
+    subgraph "네트워크"
+        Internet[🌐 인터넷]
+    end
+    
+    subgraph "로컬 환경 / VM"
+        LocalVM[💻 로컬 환경<br/>또는<br/>우분투 VM]
+    end
+    
+    subgraph "Kubernetes Cluster"
+        subgraph "Ingress Layer"
+            LB[⚖️ 로드 밸런서<br/>/ Ingress Controller<br/>NGINX Ingress]
+        end
+        
+        subgraph "Frontend Namespace"
+            FE_Service[🔌 Frontend Service<br/>ClusterIP]
+            FE_Pod1[📦 Frontend Pod 1<br/>React + Nginx]
+            FE_Pod2[📦 Frontend Pod 2<br/>React + Nginx]
+            FE_Service --> FE_Pod1
+            FE_Service --> FE_Pod2
+        end
+        
+        subgraph "Backend Namespace (board-app)"
+            BE_Service[🔌 Backend Service<br/>ClusterIP]
+            BE_Pod1[📦 Backend Pod 1<br/>Spring Boot]
+            BE_Pod2[📦 Backend Pod 2<br/>Spring Boot]
+            BE_Pod3[📦 Backend Pod 3<br/>Spring Boot]
+            BE_Service --> BE_Pod1
+            BE_Service --> BE_Pod2
+            BE_Service --> BE_Pod3
+        end
+        
+        subgraph "Database Options"
+            subgraph "Option 1: K8s 내부"
+                PG_Service[🔌 PostgreSQL Service<br/>ClusterIP]
+                PG_Pod[📦 PostgreSQL Pod<br/>StatefulSet]
+                PG_PVC[💾 PersistentVolume<br/>데이터 저장]
+                PG_Service --> PG_Pod
+                PG_Pod --> PG_PVC
+            end
+            
+            subgraph "Option 2: 로컬/외부"
+                LocalDB[(🗄️ PostgreSQL<br/>로컬 또는<br/>외부 서비스)]
+            end
+        end
+    end
+    
+    User -->|HTTP/HTTPS| Internet
+    Internet -->|요청| LocalVM
+    LocalVM -->|라우팅| LB
+    LB -->|/| FE_Service
+    LB -->|/api/*| BE_Service
+    BE_Pod1 -->|JDBC| PG_Service
+    BE_Pod2 -->|JDBC| PG_Service
+    BE_Pod3 -->|JDBC| PG_Service
+    BE_Pod1 -.->|또는| LocalDB
+    BE_Pod2 -.->|또는| LocalDB
+    BE_Pod3 -.->|또는| LocalDB
+    
+    style User fill:#e1f5ff
+    style LB fill:#fff4e1
+    style FE_Service fill:#e8f5e9
+    style BE_Service fill:#f3e5f5
+    style PG_Service fill:#ffe0b2
+    style LocalDB fill:#ffccbc
+```
